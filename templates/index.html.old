@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorize IP Address</title>
+</head>
+<body>
+    <h1>Authorize IP Address</h1>
+    <form method="post">
+        <label for="ip_address">IP Address:</label>
+        <input type="text" id="ip_address" name="ip_address" required>
+        <label for="port">Port:</label>
+        <input type="number" id="port" name="port" min="1" max="65535" required>
+        <select name="action" id="action">
+            <option value="add">Add</option>
+            <option value="remove">Remove</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>Existing Allowed IP Port Pairs:</h2>
+    <ul>
+        {% for ip, protocol, from_port, to_port in existing_ip_port_pairs %}
+            <li>{{ ip }} - Protocol: {{ protocol }}, From Port: {{ from_port }}, To Port: {{ to_port }}</li>
+        {% endfor %}
+    </ul>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
